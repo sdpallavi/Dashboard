@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marks Record</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 20px rgba(0,0,0,0.2);
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #ff7eb3;
+            color: white;
+        }
+        button {
+            margin-top: 20px;
+            padding: 12px;
+            background: #ff7eb3;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #ff4f93;
+        }
+        input[type="number"] {
+            width: 80px;
+            padding: 8px;
+            text-align: center;
+            border-radius: 5px;
+            border: 1px solid #764ba2;
+        }
+        .gpa-result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Enter Marks for Each Semester</h2>
+        
+        <form onsubmit="calculateGPA(event)">
+            <table>
+                <tr>
+                    <th>Semester</th>
+                    <th>Subject</th>
+                    <th>Marks</th>
+                </tr>
+                <tr>
+                    <td rowspan="8">Semester 1</td>
+                    <td>Probability and Statistics</td>
+                    <td><input type="number" min="0" max="100" class="marks" required></td>
+                </tr>
+                <tr>
+                    <td>Operating Systems</td>
+                    <td><input type="number" min="0" max="100" class="marks" required></td>
+                </tr>
+                <tr>
+                    <td>Software Engineering</td>
+                    <td><input type="number" min="0" max="100" class="marks" required></td>
+                </tr>
+                <tr>
+                    <td>Database Management System</td>
+                    <td><input type="number" min="0" max="100" class="marks" required></td>
+                </tr>
+                <tr>
+                    <td>Optimization Techniques</td>
+                    <td><input type="number" min="0" max="100" class="marks" required></td>
+                </tr>
+                <tr>
+                    <td>OS & SE Lab</td>
+                    <td><input type="number" min="0" max="100" class="marks" required></td>
+                </tr>
+                <tr>
+                    <td>DBMS Lab</td>
+                    <td><input type="number" min="0" max="100" class="marks" required></td>
+                </tr>
+                <tr>
+                    <td>Python with Django Lab</td>
+                    <td><input type="number" min="0" max="100" class="marks" required></td>
+                </tr>
+            </table>
+            <button type="submit">Calculate GPA</button>
+        </form>
+        <div class="gpa-result" id="gpaResult"></div>
+    </div>
+
+    <script>
+        function calculateGPA(event) {
+            event.preventDefault();
+            let totalMarks = 0;
+            let subjects = 0;
+            
+            document.querySelectorAll('.marks').forEach(input => {
+                let marks = parseFloat(input.value) || 0;
+                totalMarks += marks;
+                subjects++;
+            });
+            
+            let percentage = (totalMarks / (subjects * 100)) * 100;
+            let gpa = (percentage).toFixed(2);
+            document.getElementById('gpaResult').innerText = "Your GPA: " + gpa;
+        }
+    </script>
+</body>
+</html>
